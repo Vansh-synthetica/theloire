@@ -5,7 +5,7 @@ import { ShoppingBag, Heart, Search, Menu, X } from "lucide-react";
 const links = [
   { to: "/", label: "Home" },
   { to: "/shop", label: "Collection" },
-  { to: "/about", label: "Our Story" },
+  { to: "/about", label: "The Maison" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
