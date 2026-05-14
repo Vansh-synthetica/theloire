@@ -1,7 +1,9 @@
 import tote from "@/assets/product-tote.jpg";
 import pouch from "@/assets/product-pouch.jpg";
 import mini from "@/assets/product-mini.jpg";
-import decor from "@/assets/product-decor.jpg";
+import bagIvory from "@/assets/bag-ivory.jpg";
+import bagSand from "@/assets/bag-sand.jpg";
+import bagBucket from "@/assets/bag-bucket.jpg";
 import hero from "@/assets/hero-bag.jpg";
 
 export type Product = {
@@ -22,7 +24,6 @@ export const products: Product[] = [
     description: "An everyday heirloom in soft taupe cotton.",
     price: 248,
     image: tote,
-    story: "Handwoven over four days in a sunlit atelier, the Maison Tote carries the quiet weight of patience.",
   },
   {
     id: "rosée-pouch",
@@ -31,7 +32,6 @@ export const products: Product[] = [
     description: "A delicate drawstring pouch in champagne.",
     price: 128,
     image: pouch,
-    story: "A soft companion for keepsakes — earrings, letters, secrets best kept close.",
   },
   {
     id: "petite-lune",
@@ -40,16 +40,14 @@ export const products: Product[] = [
     description: "A crescent crossbody in warm caramel.",
     price: 198,
     image: mini,
-    story: "Compact, considered, and entirely hand-stitched.",
   },
   {
-    id: "atelier-basket",
-    name: "Atelier Basket",
-    category: "Home",
-    description: "A sculptural ivory basket for living spaces.",
-    price: 168,
-    image: decor,
-    story: "Quiet utility, made to soften any room it enters.",
+    id: "ivoire-shoulder",
+    name: "Ivoire Shoulder",
+    category: "Bags",
+    description: "A soft ivory shoulder bag, woven with airy stitches.",
+    price: 218,
+    image: bagIvory,
   },
   {
     id: "héritage-tote",
@@ -58,7 +56,14 @@ export const products: Product[] = [
     description: "A limited edition cream tote — only twelve made.",
     price: 348,
     image: hero,
-    story: "Twelve pieces, each signed by the artisan's hand.",
+  },
+  {
+    id: "sable-hobo",
+    name: "Sable Hobo",
+    category: "Bags",
+    description: "A relaxed hobo bag in warm sand.",
+    price: 228,
+    image: bagSand,
   },
   {
     id: "lin-pouch",
@@ -67,6 +72,14 @@ export const products: Product[] = [
     description: "Linen-soft pouch for evening essentials.",
     price: 118,
     image: pouch,
+  },
+  {
+    id: "champagne-bucket",
+    name: "Champagne Bucket",
+    category: "Mini Bags",
+    description: "A drawstring bucket bag in champagne nude.",
+    price: 188,
+    image: bagBucket,
   },
 ];
 

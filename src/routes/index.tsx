@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Leaf, Hand, Sparkles, Clock } from "lucide-react";
 import heroBag from "@/assets/hero-bag.jpg";
-import artisan from "@/assets/artisan.jpg";
-import texture from "@/assets/texture-detail.jpg";
-import lifestyle from "@/assets/lifestyle-1.jpg";
+import bagIvory from "@/assets/bag-ivory.jpg";
+import bagSand from "@/assets/bag-sand.jpg";
+import bagBucket from "@/assets/bag-bucket.jpg";
+import tote from "@/assets/product-tote.jpg";
+import mini from "@/assets/product-mini.jpg";
+import pouch from "@/assets/product-pouch.jpg";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
@@ -15,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Discover Théloire Crochet — a quiet luxury house of handmade crochet bags, pouches and home pieces, slowly woven by a single artisan.",
+          "Théloire Crochet — a quiet luxury house of handmade crochet bags, slowly woven by hand.",
       },
       { property: "og:title", content: "Théloire Crochet" },
       { property: "og:description", content: "Handwoven stories, crafted with love." },
@@ -43,12 +46,13 @@ const testimonials = [
   { quote: "The most thoughtful gift I have ever given. The detail is extraordinary.", name: "Eloise W.", city: "London" },
 ];
 
+const galleryBags = [heroBag, bagIvory, bagSand, bagBucket, tote, mini, pouch, bagIvory];
+
 function HomePage() {
   return (
     <>
       {/* HERO */}
       <section className="relative grain min-h-screen overflow-hidden bg-gradient-to-b from-ivory via-cream to-linen">
-        {/* Floating ambient blobs */}
         <div className="pointer-events-none absolute -left-40 top-20 h-[600px] w-[600px] rounded-full bg-champagne/40 blur-3xl animate-float" />
         <div
           className="pointer-events-none absolute -right-40 top-1/3 h-[500px] w-[500px] rounded-full bg-mocha/30 blur-3xl animate-float"
@@ -72,7 +76,7 @@ function HomePage() {
               style={{ animationDelay: "0.45s" }}
             >
               Handwoven stories, crafted with love. A quiet collection of heirloom
-              bags, pouches and pieces for the home — made slowly, by hand.
+              bags — made slowly, by hand.
             </p>
             <div
               className="animate-fade-up mt-10 flex flex-wrap items-center gap-6"
@@ -89,7 +93,7 @@ function HomePage() {
                 to="/about"
                 className="text-[11px] uppercase tracking-luxe text-foreground luxe-underline"
               >
-                Our Story
+                The Maison
               </Link>
             </div>
           </div>
@@ -106,7 +110,7 @@ function HomePage() {
                 className="animate-fade-up absolute -bottom-10 -left-6 hidden h-44 w-36 overflow-hidden rounded-sm shadow-[var(--shadow-soft)] sm:block md:-left-12 md:h-56 md:w-44"
                 style={{ animationDelay: "0.7s" }}
               >
-                <img src={texture} alt="Crochet detail" className="h-full w-full object-cover" />
+                <img src={bagBucket} alt="Crochet bucket bag" className="h-full w-full object-cover" />
               </div>
               <p
                 className="animate-fade-up absolute -right-2 top-6 hidden rotate-90 text-[10px] uppercase tracking-luxe text-muted-foreground md:block"
@@ -153,40 +157,6 @@ function HomePage() {
               <ProductCard product={p} />
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      {/* STORY */}
-      <section className="relative grain bg-cream">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-16 px-6 py-32 md:grid-cols-2 md:px-12 md:py-40">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-luxe)]">
-              <img src={artisan} alt="The artisan at work" className="h-full w-full object-cover" loading="lazy" />
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">Our Story</p>
-            <h2 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-foreground md:text-6xl">
-              Every stitch carries <span className="italic">patience</span>, warmth, and generations of craftsmanship.
-            </h2>
-            <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
-              <p>
-                Théloire began at a kitchen table, in the quiet hours of an early morning, with
-                a grandmother and a single ball of cream cotton. Forty years of practice, and
-                hands that remember every stitch.
-              </p>
-              <p>
-                Today, every piece is still made the same way — slowly, by one pair of hands,
-                for the people who notice the difference.
-              </p>
-            </div>
-            <Link
-              to="/about"
-              className="mt-10 inline-flex items-center gap-3 text-[11px] uppercase tracking-luxe luxe-underline"
-            >
-              Read her story <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </Reveal>
         </div>
       </section>
 
@@ -284,7 +254,7 @@ function HomePage() {
         </Reveal>
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
-          {[heroBag, texture, lifestyle, artisan, lifestyle, heroBag, artisan, texture].map((src, i) => (
+          {galleryBags.map((src, i) => (
             <Reveal
               key={i}
               delay={i * 60}
@@ -294,7 +264,7 @@ function HomePage() {
             >
               <img
                 src={src}
-                alt="Atelier moment"
+                alt="Théloire crochet bag"
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
               />
@@ -312,7 +282,7 @@ function HomePage() {
               Join the <span className="italic">Théloire</span> world.
             </h2>
             <p className="mx-auto mt-6 max-w-lg text-base text-muted-foreground">
-              Quiet letters about new pieces, behind the loom, and small thoughts on slow living.
+              Quiet letters about new pieces and small thoughts on slow living.
             </p>
             <form
               onSubmit={(e) => e.preventDefault()}
