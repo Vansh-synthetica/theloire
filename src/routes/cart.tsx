@@ -143,10 +143,10 @@ function CartPage() {
               </div>
 
               <button
-                onClick={() => navigate({ to: "/email-order" })}
+                onClick={() => navigate({ to: "/checkout" })}
                 className="mt-8 flex w-full items-center justify-center gap-3 bg-foreground px-8 py-4 text-[11px] uppercase tracking-luxe text-primary-foreground transition-all duration-500 hover:bg-foreground/85"
               >
-                Proceed to email order <ArrowRight className="h-3.5 w-3.5" />
+                Proceed to checkout <ArrowRight className="h-3.5 w-3.5" />
               </button>
               <p className="mt-4 text-center text-[11px] leading-relaxed text-muted-foreground">
                 An inquiry-based atelier. We respond personally to confirm availability, shipping, and care.

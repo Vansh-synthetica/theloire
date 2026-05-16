@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, Mail } from "lucide-react";
+import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, CreditCard } from "lucide-react";
 import { getProduct, products } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
@@ -54,7 +54,7 @@ function ProductPage() {
   };
   const buyNow = () => {
     add(product, qty);
-    navigate({ to: "/email-order" });
+    navigate({ to: "/checkout" });
   };
 
   return (
@@ -111,8 +111,8 @@ function ProductPage() {
               onClick={buyNow}
               className="mt-4 flex w-full items-center justify-center gap-3 bg-foreground px-8 py-5 text-[11px] uppercase tracking-luxe text-primary-foreground transition-all duration-500 hover:bg-foreground/85"
             >
-              <Mail className="h-3.5 w-3.5" />
-              Buy now — email order
+              <CreditCard className="h-3.5 w-3.5" />
+              Buy now
             </button>
 
             <div className="mt-12 space-y-4 border-t border-border/70 pt-10 text-sm text-muted-foreground">
