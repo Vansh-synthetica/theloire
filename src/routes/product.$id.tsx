@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, Mail } from "lucide-react";
+import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, CreditCard } from "lucide-react";
 import { getProduct, products } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
