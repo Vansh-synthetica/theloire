@@ -11,6 +11,8 @@ import {
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CartProvider } from "@/lib/cart";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -108,13 +110,16 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative min-h-screen bg-background">
-        <Navbar />
-        <main className="pt-0">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+      <CartProvider>
+        <div className="relative min-h-screen bg-background">
+          <Navbar />
+          <main className="pt-0">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+        <Toaster />
+      </CartProvider>
     </QueryClientProvider>
   );
 }

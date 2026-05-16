@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ShoppingBag, Heart, Search, Menu, X } from "lucide-react";
+import { useCart } from "@/lib/cart";
 
 const links = [
   { to: "/", label: "Home" },
@@ -13,6 +14,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
+  const { count } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -70,12 +72,14 @@ export function Navbar() {
           <button aria-label="Wishlist" className="hover:text-foreground transition-colors">
             <Heart className="h-4 w-4" />
           </button>
-          <button aria-label="Cart" className="relative hover:text-foreground transition-colors">
+          <Link to="/cart" aria-label="Cart" className="relative hover:text-foreground transition-colors">
             <ShoppingBag className="h-4 w-4" />
-            <span className="absolute -right-2 -top-2 text-[9px] font-sans tracking-normal text-muted-foreground">
-              0
-            </span>
-          </button>
+            {count > 0 && (
+              <span className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-foreground px-1 text-[9px] font-sans tracking-normal text-primary-foreground">
+                {count}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
 

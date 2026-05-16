@@ -1,9 +1,11 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Minus, Plus, ShoppingBag, ArrowLeft } from "lucide-react";
+import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, Mail } from "lucide-react";
 import { getProduct, products } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
+import { useCart } from "@/lib/cart";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/product/$id")({
   loader: ({ params }) => {
@@ -43,6 +45,17 @@ function ProductPage() {
   const { product } = Route.useLoaderData();
   const [qty, setQty] = useState(1);
   const related = products.filter((p) => p.id !== product.id).slice(0, 3);
+  const { add } = useCart();
+  const navigate = useNavigate();
+
+  const addToBag = () => {
+    add(product, qty);
+    toast.success(`${product.name} added to your cart`);
+  };
+  const buyNow = () => {
+    add(product, qty);
+    navigate({ to: "/email-order" });
+  };
 
   return (
     <div className="min-h-screen bg-background pt-32 md:pt-40">
@@ -82,7 +95,10 @@ function ProductPage() {
                 </button>
               </div>
 
-              <button className="group flex flex-1 items-center justify-center gap-3 bg-foreground px-8 py-4 text-[11px] uppercase tracking-luxe text-primary-foreground transition-all duration-500 hover:bg-foreground/85">
+              <button
+                onClick={addToBag}
+                className="group flex flex-1 items-center justify-center gap-3 border border-foreground bg-transparent px-8 py-4 text-[11px] uppercase tracking-luxe text-foreground transition-all duration-500 hover:bg-foreground hover:text-primary-foreground"
+              >
                 <ShoppingBag className="h-3.5 w-3.5" />
                 Add to bag
               </button>
@@ -90,6 +106,14 @@ function ProductPage() {
                 <Heart className="h-4 w-4" />
               </button>
             </div>
+
+            <button
+              onClick={buyNow}
+              className="mt-4 flex w-full items-center justify-center gap-3 bg-foreground px-8 py-5 text-[11px] uppercase tracking-luxe text-primary-foreground transition-all duration-500 hover:bg-foreground/85"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              Buy now — email order
+            </button>
 
             <div className="mt-12 space-y-4 border-t border-border/70 pt-10 text-sm text-muted-foreground">
               <div className="flex justify-between"><span>Materials</span><span>100% natural cotton</span></div>

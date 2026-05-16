@@ -9,13 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as EmailOrderRouteImport } from './routes/email-order'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -26,9 +34,19 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmailOrderRoute = EmailOrderRouteImport.update({
+  id: '/email-order',
+  path: '/email-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -50,26 +68,35 @@ const ProductIdRoute = ProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/email-order': typeof EmailOrderRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/email-order': typeof EmailOrderRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/email-order': typeof EmailOrderRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
@@ -77,33 +104,58 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/cart'
     | '/contact'
+    | '/email-order'
     | '/shop'
     | '/sitemap.xml'
+    | '/thank-you'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/shop' | '/sitemap.xml' | '/product/$id'
+  to:
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/email-order'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/thank-you'
+    | '/product/$id'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/cart'
     | '/contact'
+    | '/email-order'
     | '/shop'
     | '/sitemap.xml'
+    | '/thank-you'
     | '/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
+  EmailOrderRoute: typeof EmailOrderRoute
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ThankYouRoute: typeof ThankYouRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -118,11 +170,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/email-order': {
+      id: '/email-order'
+      path: '/email-order'
+      fullPath: '/email-order'
+      preLoaderRoute: typeof EmailOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -152,9 +218,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CartRoute: CartRoute,
   ContactRoute: ContactRoute,
+  EmailOrderRoute: EmailOrderRoute,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ThankYouRoute: ThankYouRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
