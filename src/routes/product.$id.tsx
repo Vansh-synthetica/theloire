@@ -54,7 +54,7 @@ function ProductPage() {
   };
   const buyNow = () => {
     add(product, qty);
-    navigate({ to: "/email-order" });
+    navigate({ to: "/checkout" });
   };
 
   return (
