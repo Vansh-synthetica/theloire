@@ -4,6 +4,7 @@ import { z } from "zod";
 import { ArrowLeft, Loader2, Send } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { Reveal } from "@/components/Reveal";
+import { formatPHP } from "@/lib/products";
 import { toast } from "sonner";
 
 const WEB3FORMS_ACCESS_KEY = "4593c4ad-c34a-444f-b9bf-d31f339a0037";
@@ -49,7 +50,8 @@ function CheckoutPage() {
     setSubmitting(true);
     try {
       const summaryLines = items.map(
-        (i) => `• ${i.name} (${i.category}) — Qty ${i.quantity} × €${i.price} = €${i.price * i.quantity}`,
+        (i) =>
+          `• ${i.name} (${i.category})${i.color ? ` — ${i.color}` : ""} — Qty ${i.quantity} × ${formatPHP(i.price)} = ${formatPHP(i.price * i.quantity)}`,
       );
       const product_summary = summaryLines.join("\n");
       const total_quantity = items.reduce((s, i) => s + i.quantity, 0);
@@ -64,7 +66,7 @@ function CheckoutPage() {
         shipping_address: result.data.address,
         product_summary,
         total_quantity,
-        estimated_total: `€${total}`,
+        estimated_total: formatPHP(total),
         notes: result.data.notes || "—",
       };
 
