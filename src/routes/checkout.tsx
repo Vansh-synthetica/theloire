@@ -120,24 +120,24 @@ function CheckoutPage() {
                 <h2 className="font-serif text-2xl">Order summary</h2>
                 <div className="mt-6 space-y-5">
                   {items.map((i) => (
-                    <div key={i.id} className="flex gap-4">
+                    <div key={`${i.id}-${i.color ?? ""}`} className="flex gap-4">
                       <div className="h-20 w-16 shrink-0 overflow-hidden rounded-sm bg-linen">
                         <img src={i.image} alt={i.name} loading="lazy" className="h-full w-full object-cover" />
                       </div>
                       <div className="flex flex-1 items-start justify-between gap-3">
                         <div>
-                          <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">{i.category}</p>
+                          <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">{i.category}{i.color ? ` · ${i.color}` : ""}</p>
                           <p className="mt-0.5 font-serif text-lg">{i.name}</p>
                           <p className="text-xs text-muted-foreground">Qty {i.quantity}</p>
                         </div>
-                        <p className="text-sm tabular-nums">€{i.price * i.quantity}</p>
+                        <p className="text-sm tabular-nums">{formatPHP(i.price * i.quantity)}</p>
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="mt-6 flex items-baseline justify-between border-t border-border/70 pt-5">
                   <span className="text-[11px] uppercase tracking-luxe text-muted-foreground">Estimated total</span>
-                  <span className="font-serif text-2xl tabular-nums">€{total}</span>
+                  <span className="font-serif text-2xl tabular-nums">{formatPHP(total)}</span>
                 </div>
               </aside>
             </Reveal>
