@@ -18,7 +18,7 @@ export const Route = createFileRoute("/shop")({
   component: ShopPage,
 });
 
-const categories = ["All", "Bags", "Pouches", "Mini Bags", "Home", "Limited"];
+const categories = ["All", "Small", "Medium", "Large"];
 
 function ShopPage() {
   const [filter, setFilter] = useState<string>("All");

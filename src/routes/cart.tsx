@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, ArrowRight, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { formatPHP } from "@/lib/products";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/cart")({
@@ -59,7 +60,7 @@ function CartPage() {
           <div className="mt-14 grid grid-cols-1 gap-16 lg:grid-cols-[1.6fr_1fr]">
             <div className="divide-y divide-border/70">
               {items.map((item) => (
-                <div key={item.id} className="flex gap-5 py-8 md:gap-8">
+                <div key={`${item.id}-${item.color ?? ""}`} className="flex gap-5 py-8 md:gap-8">
                   <Link
                     to="/product/$id"
                     params={{ id: item.id }}
@@ -71,15 +72,15 @@ function CartPage() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">
-                          {item.category}
+                          {item.category}{item.color ? ` · ${item.color}` : ""}
                         </p>
                         <Link to="/product/$id" params={{ id: item.id }} className="mt-1 block font-serif text-2xl md:text-3xl">
                           {item.name}
                         </Link>
-                        <p className="mt-2 text-sm tabular-nums text-foreground/80">€{item.price}</p>
+                        <p className="mt-2 text-sm tabular-nums text-foreground/80">{formatPHP(item.price)}</p>
                       </div>
                       <button
-                        onClick={() => remove(item.id)}
+                        onClick={() => remove(item.id, item.color)}
                         aria-label="Remove"
                         className="text-muted-foreground transition-colors hover:text-foreground"
                       >
@@ -90,7 +91,7 @@ function CartPage() {
                     <div className="mt-4 flex items-center justify-between">
                       <div className="flex items-center border border-border">
                         <button
-                          onClick={() => setQuantity(item.id, item.quantity - 1)}
+                          onClick={() => setQuantity(item.id, item.quantity - 1, item.color)}
                           className="grid h-10 w-10 place-items-center text-foreground/70 hover:text-foreground"
                           aria-label="Decrease"
                         >
@@ -98,14 +99,14 @@ function CartPage() {
                         </button>
                         <span className="w-10 text-center text-sm tabular-nums">{item.quantity}</span>
                         <button
-                          onClick={() => setQuantity(item.id, item.quantity + 1)}
+                          onClick={() => setQuantity(item.id, item.quantity + 1, item.color)}
                           className="grid h-10 w-10 place-items-center text-foreground/70 hover:text-foreground"
                           aria-label="Increase"
                         >
                           <Plus className="h-3 w-3" />
                         </button>
                       </div>
-                      <p className="font-serif text-lg tabular-nums">€{item.price * item.quantity}</p>
+                      <p className="font-serif text-lg tabular-nums">{formatPHP(item.price * item.quantity)}</p>
                     </div>
                   </div>
                 </div>
@@ -138,7 +139,7 @@ function CartPage() {
                 <div className="h-px bg-border/70" />
                 <div className="flex items-baseline justify-between">
                   <span className="text-[11px] uppercase tracking-luxe text-muted-foreground">Estimated total</span>
-                  <span className="font-serif text-3xl tabular-nums">€{total}</span>
+                  <span className="font-serif text-3xl tabular-nums">{formatPHP(total)}</span>
                 </div>
               </div>
 
