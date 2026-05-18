@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Product } from "./products";
+import { formatPHP } from "./products";
 
 export const OWNER_EMAIL = "orders@theloire.com";
 
@@ -9,22 +10,25 @@ export type CartItem = {
   price: number;
   image: string;
   category: string;
+  color?: string;
   quantity: number;
 };
+
+const keyOf = (id: string, color?: string) => `${id}::${color ?? ""}`;
 
 type CartContextValue = {
   items: CartItem[];
   count: number;
   total: number;
-  add: (product: Product, qty?: number) => void;
-  remove: (id: string) => void;
-  setQuantity: (id: string, qty: number) => void;
+  add: (product: Product, qty?: number, color?: string, image?: string) => void;
+  remove: (id: string, color?: string) => void;
+  setQuantity: (id: string, qty: number, color?: string) => void;
   clear: () => void;
   hydrated: boolean;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "theloire.cart.v1";
+const STORAGE_KEY = "theloire.cart.v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -53,25 +57,37 @@ export function CartProvider({ children }: { children: ReactNode }) {
       count,
       total,
       hydrated,
-      add: (p, qty = 1) =>
+      add: (p, qty = 1, color, image) =>
         setItems((prev) => {
-          const existing = prev.find((i) => i.id === p.id);
+          const k = keyOf(p.id, color);
+          const existing = prev.find((i) => keyOf(i.id, i.color) === k);
           if (existing) {
             return prev.map((i) =>
-              i.id === p.id ? { ...i, quantity: i.quantity + qty } : i,
+              keyOf(i.id, i.color) === k ? { ...i, quantity: i.quantity + qty } : i,
             );
           }
           return [
             ...prev,
-            { id: p.id, name: p.name, price: p.price, image: p.image, category: p.category, quantity: qty },
+            {
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              image: image ?? p.image,
+              category: p.category,
+              color,
+              quantity: qty,
+            },
           ];
         }),
-      remove: (id) => setItems((prev) => prev.filter((i) => i.id !== id)),
-      setQuantity: (id, qty) =>
+      remove: (id, color) =>
+        setItems((prev) => prev.filter((i) => keyOf(i.id, i.color) !== keyOf(id, color))),
+      setQuantity: (id, qty, color) =>
         setItems((prev) =>
           qty <= 0
-            ? prev.filter((i) => i.id !== id)
-            : prev.map((i) => (i.id === id ? { ...i, quantity: qty } : i)),
+            ? prev.filter((i) => keyOf(i.id, i.color) !== keyOf(id, color))
+            : prev.map((i) =>
+                keyOf(i.id, i.color) === keyOf(id, color) ? { ...i, quantity: qty } : i,
+              ),
         ),
       clear: () => setItems([]),
     };
@@ -104,13 +120,13 @@ export function buildOrderMailto(opts: {
 
   const lines: string[] = ["Hello,", "", "I would like to order:", ""];
   for (const i of items) {
-    lines.push(`• ${i.name} (${i.category})`);
-    lines.push(`  Price: €${i.price}`);
+    lines.push(`• ${i.name} (${i.category})${i.color ? ` — ${i.color}` : ""}`);
+    lines.push(`  Price: ${formatPHP(i.price)}`);
     lines.push(`  Quantity: ${i.quantity}`);
     lines.push("");
   }
   const total = items.reduce((s, i) => s + i.price * i.quantity, 0);
-  lines.push(`Estimated total: €${total}`, "");
+  lines.push(`Estimated total: ${formatPHP(total)}`, "");
   lines.push("— My details —");
   lines.push(`Name: ${name}`);
   lines.push(`Email: ${email}`);

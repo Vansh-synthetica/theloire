@@ -30,8 +30,8 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const featured = products.slice(0, 4);
-const bestSellers = [...products, ...products];
+const featured = products;
+const bestSellers = [...products, ...products, ...products];
 
 const values = [
   { icon: Hand, title: "Handmade with care", text: "Each piece woven by a single pair of hands." },
@@ -151,7 +151,7 @@ function HomePage() {
           </Link>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p, i) => (
             <Reveal key={p.id} delay={i * 100}>
               <ProductCard product={p} />
@@ -213,7 +213,7 @@ function HomePage() {
                 </div>
                 <div className="mt-5 flex items-baseline justify-between">
                   <h3 className="font-serif text-xl text-foreground">{p.name}</h3>
-                  <span className="text-sm tabular-nums text-foreground/70">€{p.price}</span>
+                  <span className="text-sm tabular-nums text-foreground/70">₱{p.price}</span>
                 </div>
               </Link>
             ))}

@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Heart, Minus, Plus, ShoppingBag, ArrowLeft, CreditCard } from "lucide-react";
-import { getProduct, products } from "@/lib/products";
+import { getProduct, products, formatPHP } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Reveal } from "@/components/Reveal";
 import { useCart } from "@/lib/cart";
@@ -41,19 +41,27 @@ export const Route = createFileRoute("/product/$id")({
   ),
 });
 
+const SWATCH_CLASSES: Record<string, string> = {
+  Ivory: "bg-[#f4ede2]",
+  Sand: "bg-[#d9c2a3]",
+  Champagne: "bg-[#e6cfa8]",
+  Caramel: "bg-[#b08560]",
+};
+
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const [qty, setQty] = useState(1);
+  const [color, setColor] = useState(product.colors[0]);
   const related = products.filter((p) => p.id !== product.id).slice(0, 3);
   const { add } = useCart();
   const navigate = useNavigate();
 
   const addToBag = () => {
-    add(product, qty);
-    toast.success(`${product.name} added to your cart`);
+    add(product, qty, color.name, color.image);
+    toast.success(`${product.name} (${color.name}) added to your cart`);
   };
   const buyNow = () => {
-    add(product, qty);
+    add(product, qty, color.name, color.image);
     navigate({ to: "/checkout" });
   };
 
@@ -67,7 +75,7 @@ function ProductPage() {
         <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-linen shadow-[var(--shadow-luxe)]">
-              <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+              <img src={color.image} alt={`${product.name} — ${color.name}`} className="h-full w-full object-cover transition-opacity duration-500" />
             </div>
           </Reveal>
 
@@ -76,13 +84,36 @@ function ProductPage() {
             <h1 className="mt-4 font-serif text-5xl leading-[1.05] tracking-tight text-foreground md:text-6xl">
               {product.name}
             </h1>
-            <p className="mt-6 text-2xl tabular-nums font-serif text-foreground/85">€{product.price}</p>
+            <p className="mt-6 text-2xl tabular-nums font-serif text-foreground/85">{formatPHP(product.price)}</p>
 
             <div className="mt-8 h-px bg-border/70" />
 
             <p className="mt-8 text-base leading-relaxed text-muted-foreground">
-              {product.story ?? product.description}
+              {product.description}
             </p>
+
+            <div className="mt-8">
+              <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">
+                Color · <span className="text-foreground">{color.name}</span>
+              </p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                {product.colors.map((c: { name: string; image: string }) => (
+                  <button
+                    key={c.name}
+                    onClick={() => setColor(c)}
+                    aria-label={c.name}
+                    title={c.name}
+                    className={`h-9 w-9 rounded-full border transition-all duration-300 ${
+                      SWATCH_CLASSES[c.name] ?? "bg-linen"
+                    } ${
+                      color.name === c.name
+                        ? "ring-2 ring-offset-2 ring-offset-background ring-foreground border-transparent"
+                        : "border-border hover:border-foreground/60"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
 
             <div className="mt-10 flex items-center gap-6">
               <div className="flex items-center border border-border">

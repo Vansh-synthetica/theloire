@@ -1,10 +1,9 @@
-import tote from "@/assets/product-tote.jpg";
-import pouch from "@/assets/product-pouch.jpg";
 import mini from "@/assets/product-mini.jpg";
 import bagIvory from "@/assets/bag-ivory.jpg";
 import bagSand from "@/assets/bag-sand.jpg";
 import bagBucket from "@/assets/bag-bucket.jpg";
-import hero from "@/assets/hero-bag.jpg";
+
+export type ColorVariant = { name: string; image: string };
 
 export type Product = {
   id: string;
@@ -13,73 +12,46 @@ export type Product = {
   description: string;
   price: number;
   image: string;
+  colors: readonly ColorVariant[];
   story?: string;
 };
 
+export const formatPHP = (n: number) => `₱${n.toLocaleString("en-PH")}`;
+
+const COLORS: ColorVariant[] = [
+  { name: "Ivory", image: bagIvory },
+  { name: "Sand", image: bagSand },
+  { name: "Champagne", image: bagBucket },
+  { name: "Caramel", image: mini },
+];
+
 export const products: Product[] = [
   {
-    id: "maison-tote",
-    name: "Maison Tote",
-    category: "Bags",
-    description: "An everyday heirloom in soft taupe cotton.",
-    price: 248,
-    image: tote,
-  },
-  {
-    id: "rosée-pouch",
-    name: "Rosée Pouch",
-    category: "Pouches",
-    description: "A delicate drawstring pouch in champagne.",
-    price: 128,
-    image: pouch,
-  },
-  {
-    id: "petite-lune",
-    name: "Petite Lune",
-    category: "Mini Bags",
-    description: "A crescent crossbody in warm caramel.",
-    price: 198,
-    image: mini,
-  },
-  {
-    id: "ivoire-shoulder",
-    name: "Ivoire Shoulder",
-    category: "Bags",
-    description: "A soft ivory shoulder bag, woven with airy stitches.",
-    price: 218,
+    id: "petite",
+    name: "Petite Crochet Bag",
+    category: "Small",
+    description: "A small handwoven crochet bag — perfect for essentials.",
+    price: 400,
     image: bagIvory,
+    colors: COLORS,
   },
   {
-    id: "héritage-tote",
-    name: "Héritage Tote",
-    category: "Limited",
-    description: "A limited edition cream tote — only twelve made.",
-    price: 348,
-    image: hero,
-  },
-  {
-    id: "sable-hobo",
-    name: "Sable Hobo",
-    category: "Bags",
-    description: "A relaxed hobo bag in warm sand.",
-    price: 228,
+    id: "classique",
+    name: "Classique Crochet Bag",
+    category: "Medium",
+    description: "A medium handwoven crochet bag — everyday elegance.",
+    price: 450,
     image: bagSand,
+    colors: COLORS,
   },
   {
-    id: "lin-pouch",
-    name: "Lin Pouch",
-    category: "Pouches",
-    description: "Linen-soft pouch for evening essentials.",
-    price: 118,
-    image: pouch,
-  },
-  {
-    id: "champagne-bucket",
-    name: "Champagne Bucket",
-    category: "Mini Bags",
-    description: "A drawstring bucket bag in champagne nude.",
-    price: 188,
+    id: "grande",
+    name: "Grande Crochet Bag",
+    category: "Large",
+    description: "A large handwoven crochet bag — generous and graceful.",
+    price: 500,
     image: bagBucket,
+    colors: COLORS,
   },
 ];
 

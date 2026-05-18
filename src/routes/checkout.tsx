@@ -4,6 +4,7 @@ import { z } from "zod";
 import { ArrowLeft, Loader2, Send } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { Reveal } from "@/components/Reveal";
+import { formatPHP } from "@/lib/products";
 import { toast } from "sonner";
 
 const WEB3FORMS_ACCESS_KEY = "4593c4ad-c34a-444f-b9bf-d31f339a0037";
@@ -49,7 +50,8 @@ function CheckoutPage() {
     setSubmitting(true);
     try {
       const summaryLines = items.map(
-        (i) => `• ${i.name} (${i.category}) — Qty ${i.quantity} × €${i.price} = €${i.price * i.quantity}`,
+        (i) =>
+          `• ${i.name} (${i.category})${i.color ? ` — ${i.color}` : ""} — Qty ${i.quantity} × ${formatPHP(i.price)} = ${formatPHP(i.price * i.quantity)}`,
       );
       const product_summary = summaryLines.join("\n");
       const total_quantity = items.reduce((s, i) => s + i.quantity, 0);
@@ -64,7 +66,7 @@ function CheckoutPage() {
         shipping_address: result.data.address,
         product_summary,
         total_quantity,
-        estimated_total: `€${total}`,
+        estimated_total: formatPHP(total),
         notes: result.data.notes || "—",
       };
 
@@ -118,24 +120,24 @@ function CheckoutPage() {
                 <h2 className="font-serif text-2xl">Order summary</h2>
                 <div className="mt-6 space-y-5">
                   {items.map((i) => (
-                    <div key={i.id} className="flex gap-4">
+                    <div key={`${i.id}-${i.color ?? ""}`} className="flex gap-4">
                       <div className="h-20 w-16 shrink-0 overflow-hidden rounded-sm bg-linen">
                         <img src={i.image} alt={i.name} loading="lazy" className="h-full w-full object-cover" />
                       </div>
                       <div className="flex flex-1 items-start justify-between gap-3">
                         <div>
-                          <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">{i.category}</p>
+                          <p className="text-[10px] uppercase tracking-luxe text-muted-foreground">{i.category}{i.color ? ` · ${i.color}` : ""}</p>
                           <p className="mt-0.5 font-serif text-lg">{i.name}</p>
                           <p className="text-xs text-muted-foreground">Qty {i.quantity}</p>
                         </div>
-                        <p className="text-sm tabular-nums">€{i.price * i.quantity}</p>
+                        <p className="text-sm tabular-nums">{formatPHP(i.price * i.quantity)}</p>
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="mt-6 flex items-baseline justify-between border-t border-border/70 pt-5">
                   <span className="text-[11px] uppercase tracking-luxe text-muted-foreground">Estimated total</span>
-                  <span className="font-serif text-2xl tabular-nums">€{total}</span>
+                  <span className="font-serif text-2xl tabular-nums">{formatPHP(total)}</span>
                 </div>
               </aside>
             </Reveal>
