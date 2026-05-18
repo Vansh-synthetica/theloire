@@ -97,7 +97,7 @@ function ProductPage() {
                 Color · <span className="text-foreground">{color.name}</span>
               </p>
               <div className="mt-3 flex flex-wrap gap-3">
-                {product.colors.map((c) => (
+                {product.colors.map((c: { name: string; image: string }) => (
                   <button
                     key={c.name}
                     onClick={() => setColor(c)}
