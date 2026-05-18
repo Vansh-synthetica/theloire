@@ -12,7 +12,7 @@ export type Product = {
   description: string;
   price: number;
   image: string;
-  colors: ColorVariant[];
+  colors: readonly ColorVariant[];
   story?: string;
 };
 
