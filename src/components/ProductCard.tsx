@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Heart } from "lucide-react";
-import type { Product } from "@/lib/products";
+import { formatPHP, type Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
           </p>
           <h3 className="mt-1 font-serif text-xl text-foreground">{product.name}</h3>
         </div>
-        <p className="font-sans text-sm tabular-nums text-foreground/80">€{product.price}</p>
+        <p className="font-sans text-sm tabular-nums text-foreground/80">{formatPHP(product.price)}</p>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">{product.description}</p>
     </Link>
