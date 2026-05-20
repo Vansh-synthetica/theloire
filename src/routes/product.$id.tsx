@@ -108,7 +108,7 @@ function ProductPage() {
                     aria-label={c.name}
                     title={c.name}
                     className={`h-9 w-9 rounded-full border transition-all duration-300 ${
-                      SWATCH_CLASSES[c.name] ?? "bg-linen"
+                      SWATCH_STYLES[c.name] ?? "bg-linen"
                     } ${
                       color.name === c.name
                         ? "ring-2 ring-offset-2 ring-offset-background ring-foreground border-transparent"
