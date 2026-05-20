@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import bagIvory from "@/assets/bag-ivory.jpg";
-import bagSand from "@/assets/bag-sand.jpg";
-import bagBucket from "@/assets/bag-bucket.jpg";
-import hero from "@/assets/hero-bag.jpg";
+import bagIvory from "@/assets/colors/white.jpg";
+import bagSand from "@/assets/colors/taupe.jpg";
+import bagBucket from "@/assets/colors/green.jpg";
+import hero from "@/assets/colors/pattern-red-blue.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/about")({
