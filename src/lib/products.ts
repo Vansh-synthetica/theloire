@@ -1,7 +1,11 @@
-import mini from "@/assets/product-mini.jpg";
-import bagIvory from "@/assets/bag-ivory.jpg";
-import bagSand from "@/assets/bag-sand.jpg";
-import bagBucket from "@/assets/bag-bucket.jpg";
+import patternRedBlue from "@/assets/colors/pattern-red-blue.jpg";
+import green from "@/assets/colors/green.jpg";
+import darkRed from "@/assets/colors/dark-red.jpg";
+import lightRed from "@/assets/colors/light-red.jpg";
+import white from "@/assets/colors/white.jpg";
+import blue from "@/assets/colors/blue.jpg";
+import gray from "@/assets/colors/gray.jpg";
+import taupe from "@/assets/colors/taupe.jpg";
 
 export type ColorVariant = { name: string; image: string };
 
@@ -19,10 +23,14 @@ export type Product = {
 export const formatPHP = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 
 const COLORS: ColorVariant[] = [
-  { name: "Ivory", image: bagIvory },
-  { name: "Sand", image: bagSand },
-  { name: "Champagne", image: bagBucket },
-  { name: "Caramel", image: mini },
+  { name: "Pattern Red/Blue", image: patternRedBlue },
+  { name: "Green", image: green },
+  { name: "Dark Red", image: darkRed },
+  { name: "Light Red", image: lightRed },
+  { name: "White", image: white },
+  { name: "Blue", image: blue },
+  { name: "Gray", image: gray },
+  { name: "Taupe", image: taupe },
 ];
 
 export const products: Product[] = [
@@ -32,16 +40,7 @@ export const products: Product[] = [
     category: "Small",
     description: "A small handwoven crochet bag — perfect for essentials.",
     price: 400,
-    image: bagIvory,
-    colors: COLORS,
-  },
-  {
-    id: "classique",
-    name: "Classique Crochet Bag",
-    category: "Medium",
-    description: "A medium handwoven crochet bag — everyday elegance.",
-    price: 450,
-    image: bagSand,
+    image: patternRedBlue,
     colors: COLORS,
   },
   {
@@ -50,7 +49,7 @@ export const products: Product[] = [
     category: "Large",
     description: "A large handwoven crochet bag — generous and graceful.",
     price: 500,
-    image: bagBucket,
+    image: green,
     colors: COLORS,
   },
 ];

@@ -41,11 +41,15 @@ export const Route = createFileRoute("/product/$id")({
   ),
 });
 
-const SWATCH_CLASSES: Record<string, string> = {
-  Ivory: "bg-[#f4ede2]",
-  Sand: "bg-[#d9c2a3]",
-  Champagne: "bg-[#e6cfa8]",
-  Caramel: "bg-[#b08560]",
+const SWATCH_STYLES: Record<string, string> = {
+  "Pattern Red/Blue": "bg-gradient-to-br from-[#b53a3a] to-[#2a4a8a]",
+  Green: "bg-[#4a6b3a]",
+  "Dark Red": "bg-[#7a1f1f]",
+  "Light Red": "bg-[#d96a6a]",
+  White: "bg-[#f7f5f0]",
+  Blue: "bg-[#2f5f9a]",
+  Gray: "bg-[#8a8a8a]",
+  Taupe: "bg-[#b09a82]",
 };
 
 function ProductPage() {
@@ -104,7 +108,7 @@ function ProductPage() {
                     aria-label={c.name}
                     title={c.name}
                     className={`h-9 w-9 rounded-full border transition-all duration-300 ${
-                      SWATCH_CLASSES[c.name] ?? "bg-linen"
+                      SWATCH_STYLES[c.name] ?? "bg-linen"
                     } ${
                       color.name === c.name
                         ? "ring-2 ring-offset-2 ring-offset-background ring-foreground border-transparent"
