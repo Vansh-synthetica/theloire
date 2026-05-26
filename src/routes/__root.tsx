@@ -13,6 +13,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "@/lib/cart";
 import { Toaster } from "@/components/ui/sonner";
+import { PageTransition } from "@/components/PageTransition";
 
 function NotFoundComponent() {
   return (
@@ -114,7 +115,9 @@ function RootComponent() {
         <div className="relative min-h-screen bg-background">
           <Navbar />
           <main className="pt-0">
-            <Outlet />
+            <PageTransition>
+              <Outlet />
+            </PageTransition>
           </main>
           <Footer />
         </div>
