@@ -31,7 +31,7 @@ function ShopPage() {
     <div className="min-h-screen bg-background">
       <section className="relative grain border-b border-border/60 bg-gradient-to-b from-ivory to-cream px-6 pb-20 pt-40 md:px-12 md:pt-48">
         <div className="mx-auto max-w-[1400px]">
-          <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">The Maison</p>
+          <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">The Atelier</p>
           <h1 className="mt-5 font-serif text-6xl leading-[0.95] tracking-tight text-foreground md:text-8xl">
             The <span className="italic">Collection</span>
           </h1>

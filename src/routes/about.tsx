@@ -8,9 +8,9 @@ import { Reveal } from "@/components/Reveal";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "The Maison — Théloire Crochet" },
-      { name: "description", content: "A quiet luxury house of handwoven crochet bags." },
-      { property: "og:title", content: "The Maison — Théloire Crochet" },
+      { title: "The Atelier — Théloire Crochet" },
+      { name: "description", content: "A quiet luxury atelier of handwoven crochet bags." },
+      { property: "og:title", content: "The Atelier — Théloire Crochet" },
       { property: "og:description", content: "Handwoven crochet bags, made slowly." },
       { property: "og:url", content: "/about" },
       { property: "og:image", content: hero },
@@ -25,7 +25,7 @@ function AboutPage() {
     <div className="min-h-screen bg-background">
       <section className="relative grain bg-gradient-to-b from-ivory to-cream px-6 pb-24 pt-40 md:px-12 md:pt-48">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">The Maison</p>
+          <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">The Atelier</p>
           <h1 className="mt-6 font-serif text-6xl leading-[0.95] tracking-tight text-foreground md:text-8xl">
             Quiet luxury,<br /><span className="italic">handwoven.</span>
           </h1>

@@ -16,10 +16,10 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-[11px] uppercase tracking-luxe text-foreground">Maison</h4>
+          <h4 className="text-[11px] uppercase tracking-luxe text-foreground">Atelier</h4>
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
             <li><Link to="/shop" className="luxe-underline">Collection</Link></li>
-            <li><Link to="/about" className="luxe-underline">The Maison</Link></li>
+            <li><Link to="/about" className="luxe-underline">The Atelier</Link></li>
             <li><Link to="/contact" className="luxe-underline">Contact</Link></li>
           </ul>
         </div>
