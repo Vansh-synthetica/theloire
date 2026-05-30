@@ -224,3 +224,16 @@
   }
 }
 
+
+/* Smooth, premium scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+body {
+  overflow-x: hidden;
+}
