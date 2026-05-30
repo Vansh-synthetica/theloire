@@ -74,8 +74,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Théloire Crochet — Handwoven Stories, Crafted with Love" },
       { name: "description", content: "An elegant ecommerce website for Théloire Crochet, showcasing premium handmade luxury crochet goods." },
       { name: "twitter:description", content: "An elegant ecommerce website for Théloire Crochet, showcasing premium handmade luxury crochet goods." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4b83f1d3-82f9-4dde-9c76-04b862c66e72/id-preview-e5024136--4a80d997-5075-4c83-add1-005e3862e363.lovable.app-1778731097396.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4b83f1d3-82f9-4dde-9c76-04b862c66e72/id-preview-e5024136--4a80d997-5075-4c83-add1-005e3862e363.lovable.app-1778731097396.png" },
+      { property: "og:image", content: "/og-image.jpg" },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

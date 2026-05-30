@@ -40,11 +40,6 @@ const values = [
   { icon: Sparkles, title: "One of a kind", text: "Small batches, signed by the artisan." },
 ];
 
-const testimonials = [
-  { quote: "Absolutely beautiful craftsmanship. I will treasure this for years.", name: "Camille R.", city: "Paris" },
-  { quote: "Feels truly handmade and luxurious — like nothing else I own.", name: "Hana M.", city: "Kyoto" },
-  { quote: "The most thoughtful gift I have ever given. The detail is extraordinary.", name: "Eloise W.", city: "London" },
-];
 
 const galleryBags = [heroBag, bagIvory, bagSand, bagBucket, tote, mini, pouch, bagIvory];
 
@@ -62,7 +57,7 @@ function HomePage() {
         <div className="relative mx-auto grid min-h-screen max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-24 pt-40 md:grid-cols-12 md:gap-16 md:px-12 md:pt-44">
           <div className="md:col-span-6 lg:col-span-5">
             <p className="animate-fade-up text-[11px] uppercase tracking-luxe text-muted-foreground" style={{ animationDelay: "0.1s" }}>
-              Maison · Est. 2024
+              Atelier · Est. 2025
             </p>
             <h1
               className="animate-fade-up mt-6 font-serif text-[3.5rem] leading-[0.95] tracking-tight text-foreground sm:text-[5rem] md:text-[5.5rem] lg:text-[6.5rem]"
@@ -93,7 +88,7 @@ function HomePage() {
                 to="/about"
                 className="text-[11px] uppercase tracking-luxe text-foreground luxe-underline"
               >
-                The Maison
+                The Atelier
               </Link>
             </div>
           </div>
@@ -104,7 +99,7 @@ function HomePage() {
                 className="animate-fade-up relative aspect-[4/5] overflow-hidden rounded-sm shadow-[var(--shadow-luxe)]"
                 style={{ animationDelay: "0.4s" }}
               >
-                <img src={heroBag} alt="Maison crochet tote" className="h-full w-full object-cover" />
+                <img src={heroBag} alt="Atelier crochet tote" className="h-full w-full object-cover" />
               </div>
               <div
                 className="animate-fade-up absolute -bottom-10 -left-6 hidden h-44 w-36 overflow-hidden rounded-sm shadow-[var(--shadow-soft)] sm:block md:-left-12 md:h-56 md:w-44"
@@ -143,7 +138,7 @@ function HomePage() {
           <div>
             <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">Featured</p>
             <h2 className="mt-4 font-serif text-5xl tracking-tight text-foreground md:text-6xl">
-              The Maison <span className="italic">Collection</span>
+              The <span className="italic">Collection</span>
             </h2>
           </div>
           <Link to="/shop" className="text-[11px] uppercase tracking-luxe luxe-underline">
@@ -221,26 +216,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-[1400px] px-6 py-32 md:px-12 md:py-40">
-        <Reveal className="text-center">
-          <p className="text-[11px] uppercase tracking-luxe text-muted-foreground">Words from the Maison</p>
-        </Reveal>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal
-              key={t.name}
-              delay={i * 120}
-              className="rounded-sm border border-border/70 bg-ivory p-10 shadow-[var(--shadow-soft)]"
-            >
-              <p className="font-serif text-2xl italic leading-snug text-foreground">"{t.quote}"</p>
-              <p className="mt-8 text-[11px] uppercase tracking-luxe text-muted-foreground">
-                {t.name} · {t.city}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
 
       {/* GALLERY */}
       <section className="mx-auto max-w-[1400px] px-6 pb-32 md:px-12 md:pb-40">
